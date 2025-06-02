@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Edytuj film{% endblock %}
+{% block content %}
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Tytuł</label>
+    <input type="text" name="title" class="form-control" value="{{ movie.title }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Opis</label>
+    <textarea name="description" class="form-control">{{ movie.description }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Ocena</label>
+    <input type="number" name="rating" class="form-control" step="0.5" min="0" max="10" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">URL okładki</label>
+    <input type="url" name="cover_url" class="form-control" value="{{ movie.cover_url }}">
+  </div>
+  <button type="submit" class="btn btn-primary">💾 Zapisz zmiany</button>
+  <a href="/" class="btn btn-secondary">Anuluj</a>
+</form>
+{% endblock %}

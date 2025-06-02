@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Lista filmów{% endblock %}
+
+{% block content %}
+<h1 class="mb-2 text-center">📽️ Ranking filmów</h1>
+
+<div class="text-center mb-3">
+  <a href="{{ url_for('index', sort_by='rating', order='desc') }}" class="btn btn-outline-primary btn-sm {% if sort_by == 'rating' and order == 'desc' %}active{% endif %}">📈 Ocena ↓</a>
+  <a href="{{ url_for('index', sort_by='rating', order='asc') }}" class="btn btn-outline-primary btn-sm {% if sort_by == 'rating' and order == 'asc' %}active{% endif %}">📉 Ocena ↑</a>
+  <a href="{{ url_for('index', sort_by='title', order='asc') }}" class="btn btn-outline-secondary btn-sm {% if sort_by == 'title' and order == 'asc' %}active{% endif %}">🔤 A–Z</a>
+  <a href="{{ url_for('index', sort_by='title', order='desc') }}" class="btn btn-outline-secondary btn-sm {% if sort_by == 'title' and order == 'desc' %}active{% endif %}">🔠 Z–A</a>
+</div>
+
+<div class="text-center mb-4">
+  <a href="{{ url_for('add_movie') }}" class="btn btn-primary">➕ Dodaj film</a>
+</div>
+
+<div class="row">
+  {% for m in movies %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm card-hover">
+      <img src="{{ m.cover_url }}" class="card-img-top" alt="Okładka">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ m.title }}</h5>
+      </div>
+      <div class="card-details">
+        <p class="card-text">{{ m.description }}</p>
+        <p class="card-text"><strong>Ocena: {{ m.rating }}/10</strong></p>
+        <a href="{{ url_for('edit_movie', movie_id=m.id) }}" class="btn btn-sm btn-outline-secondary">✏️ Edytuj</a>
+        <form method="post" action="{{ url_for('delete_movie', movie_id=m.id) }}" class="d-inline">
+          <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Na pewno usunąć?')">🗑️ Usuń</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

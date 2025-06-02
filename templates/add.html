@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Dodaj film{% endblock %}
+{% block content %}
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Tytuł</label>
+    <input type="text" name="title" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Opis</label>
+    <textarea name="description" class="form-control"></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Ocena</label>
+    <input type="number" name="rating" class="form-control" step="0.5" min="0" max="10" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">URL okładki</label>
+    <input type="url" name="cover_url" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-success">💾 Zapisz</button>
+  <a href="/" class="btn btn-secondary">Anuluj</a>
+</form>
+{% endblock %}
